@@ -29,16 +29,16 @@ It uses **Azure Automation (PowerShell 7)**, **Managed Identity**, and the **Fab
 
 Before using this runbook, make sure you have:
 
-- A **Microsoft Fabric Capacity (F-SKU)** deployed in Azure.  
+- A **Microsoft Fabric Capacity (F-SKU)** deployed in Azure.
+- **Microosft Fabric Capacity Metrics App** installed  
 - An **Azure Automation Account** with:
   - PowerShell 7 runtime
   - System-Assigned or User-Assigned Managed Identity  
 - Managed Identity permissions:
   - `Contributor` role on the Fabric capacity
   - `Viewer` (and optionally `Build`) permission on the *Fabric Capacity Metrics* workspace and dataset  
-- Power BI tenant settings:
-  - ✅ *Service principals can call Fabric public APIs *  
-  - ✅ *Allow service principals to use ExecuteQueries API*  
+- Fabric tenant settings:
+  - ✅ *Service principals can call Fabric public APIs* 
 
 ---
 
