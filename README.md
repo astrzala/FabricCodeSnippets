@@ -12,7 +12,7 @@ This repository is designed as a toolbox: each folder contains one or more scrip
 
 ## 🔑 Key Features
 - Ready-to-use **PowerShell**, **Bash**, and **Python** snippets.
-- Scripts tailored for **Microsoft Fabric** scenarios
+- Scripts tailored for **Microsoft Fabric** scenarios.
 - Clear folder structure for easy navigation.
 - Continuously growing set of utilities as new needs arise.
 
