@@ -1,5 +1,5 @@
-<p align="center" style="margin:0; padding:0;">
-  <img src="~/Data_Guideline_Logo_GitHub.png" alt="Data Guideline Logo" width="100%" style="margin:0; padding:0; display:block;"/>
+<p align="center" style="margin-top:0; margin-bottom:0;">
+  <img src="~/Data_Guideline_Logo_GitHub.png" alt="Data Guideline Banner" width="100%" style="display:block; margin:0;"/>
 </p>
 
 <h1>
