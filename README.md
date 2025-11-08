@@ -1,6 +1,6 @@
 <div align="center">
   <h1>
-    <img src="~/Data_Guideline_Logo_GitHub.png" alt="Data Guideline Logo" width="250">
+    <img src="~/Data_Guideline_Logo_GitHub.png" alt="Data Guideline Logo">
   </h1>
 </div>
 
