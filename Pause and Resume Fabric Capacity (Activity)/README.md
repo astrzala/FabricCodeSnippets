@@ -38,7 +38,7 @@ Before using this runbook, make sure you have:
   - `Contributor` role on the Fabric capacity
   - `Viewer` (and optionally `Build`) permission on the *Fabric Capacity Metrics* workspace and dataset  
 - Fabric tenant settings:
-  - ✅ *Service principals can call Fabric public APIs* 
+  - *Service principals can call Fabric public APIs* 
 
 ---
 
@@ -56,9 +56,9 @@ Before using this runbook, make sure you have:
 
 3. **Monitor Logs**
    - Each run logs:
-     - ✅ `[ACTIVE]` when capacity still has compute activity.  
-     - 💤 `[IDLE]` when no compute activity and suspension triggered.  
-     - 🛑 `[ERROR]` when suspension fails.
+     - `[ACTIVE]` when capacity still has compute activity.  
+     - `[IDLE]` when no compute activity and suspension triggered.  
+     - `[ERROR]` when suspension fails.
 
 ---
 
@@ -109,13 +109,12 @@ If `SumCUs = 0` → capacity is **suspended** via ARM API.
 ## 📌 Example Log Output
 
 ```
-✅ [ACTIVE]  SumCUs: 320 | Window: 5 min | Capacity: fabric-dev → STILL RUNNING
-💤 [IDLE]    SumCUs: 0   | Window: 5 min | Capacity: fabric-dev → SUSPENDING...
-🛑 [ERROR]   SumCUs: 0   | Window: 5 min | Capacity: fabric-dev → SUSPEND FAILED: <error>
+[ACTIVE]  SumCUs: 320 | Window: 5 min | Capacity: fabric-dev → STILL RUNNING
+[IDLE]    SumCUs: 0   | Window: 5 min | Capacity: fabric-dev → SUSPENDING...
+[ERROR]   SumCUs: 0   | Window: 5 min | Capacity: fabric-dev → SUSPEND FAILED: <error>
 ```
 
 ---
 
-## 📝 License
+*This script is provided as-is. Test thoroughly in a non-production environment before deployment.*
 
-MIT — feel free to use and modify.
