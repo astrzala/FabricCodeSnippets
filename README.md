@@ -1,9 +1,11 @@
-<svg viewBox="0 0 1600 360" xmlns="http://www.w3.org/2000/svg">
-  <!-- White background strip -->
-  <rect width="1600" height="360" fill="#ffffff"/>
-  <!-- Centered logo: adjust width to taste -->
-  <image href="~/Data_Guideline.png" width="300" height="300" x="650" y="30"/>
-</svg>
+<div align="center">
+  <h1>
+    <img src="~/Data_Guideline_Logo_GitHub.png.png" alt="Data Guideline Logo" width="250">
+  </h1>
+</div>
+
+
+
 
 <h1>
   <img src="~/Fabric_256.svg" alt="Microsoft Fabric Logo" width="30" style="vertical-align: middle;"/>
