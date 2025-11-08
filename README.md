@@ -1,5 +1,5 @@
 <h1>
-  <img src="~/Data_Guideline.png" alt="Data Guideline Logo" width="150" style="vertical-align: center;"/>
+  <img src="~/Data_Guideline.png" alt="Data Guideline Logo" width="250" style="vertical-align: center;"/>
 </h1>
 
 <h1>
