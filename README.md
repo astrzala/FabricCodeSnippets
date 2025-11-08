@@ -1,4 +1,4 @@
-<div align="center">
+<div align="center" style="padding: 0px; margin: 0px">
   <h1>
     <img src="~/Data_Guideline_Logo_GitHub.png" alt="Data Guideline Logo">
   </h1>
