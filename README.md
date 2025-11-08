@@ -1,6 +1,4 @@
-<p align="center" style="margin-top:0; margin-bottom:0;">
-  <img src="~/Data_Guideline_Logo_GitHub.png" alt="Data Guideline Banner" width="100%" style="display:block; margin:0;"/>
-</p>
+<img src="~/Data_Guideline_Logo_GitHub.png" alt="Data Guideline Banner" width="100%">
 
 <h1>
   <img src="~/Fabric_256.svg" alt="Microsoft Fabric Logo" width="30" style="vertical-align: middle;"/>
