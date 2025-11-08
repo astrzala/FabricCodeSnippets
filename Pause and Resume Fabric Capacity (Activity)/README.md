@@ -1,104 +1,121 @@
-# 🔄 Microsoft Fabric Capacity Auto-Pause Runbook
+# 🔄 Microsoft Fabric Capacity Auto-Suspend Based on Activity ⚡️
 
-This runbook automatically **pauses your Microsoft Fabric capacity** when there has been no activity for a configurable window (default: 90 minutes).  
-It uses **Azure Automation (PowerShell 7)** + **Managed Identity** + the official **Fabric Capacity Metrics App** semantic model.
+This PowerShell runbook automatically **suspends your Microsoft Fabric capacity** when no activity is detected within a configurable time window.  
+It uses **Azure Automation (PowerShell 7)**, **Managed Identity**, and the **Fabric Capacity Metrics** semantic model to decide whether the capacity should remain active or be paused.
 
 ---
 
 ## 🔑 Key Features
-- ⏱️ **Auto-pause** Fabric capacities with no detected activity.
-- 📊 **Activity detection** via DirectQuery tables in the *Capacity Metrics* semantic model.
-- 🧩 **Granular insights**: summary of recent operations by type (Interactive/Background) and operation name.
-- 🛡️ **Safe defaults**: requires continuous inactivity before pausing; conservatively skips pausing on errors.
-- 🌐 **Runs serverless** inside Azure Automation with a Managed Identity (no secrets).
+
+- 💤 **Auto-suspend:** Automatically pauses the capacity when no compute activity (`SumCUs`) is detected.
+- 📈 **Metrics-driven:** Uses the official *Fabric Capacity Metrics* semantic model for real-time usage checks.
+- 🧠 **Smart decision logic:** Keeps capacity running when recent activity is detected; suspends otherwise.
+- 🔐 **Credential-free:** Uses Managed Identity for authentication — no secrets required.
+- ☁️ **Serverless automation:** Designed for Azure Automation Runbooks, with minimal maintenance.
 
 ---
 
 ## ⚙️ How It Works
-1. Runbook queries the **ARM API** to check Fabric capacity state.
-2. Uses the **Power BI ExecuteQueries REST API** against the *Capacity Metrics* dataset:
-   - `TimePointInteractiveDetail` → user/interactive operations (queries, adhoc analysis).
-   - `TimePointBackgroundDetail` → background jobs (refreshes, pipelines, notebooks, warehouses).
-3. If no rows exist within the **QuietMinutes** window (default: 90), the capacity is **suspended** using the ARM `suspend` endpoint.
-4. Logs a **summary of activity kinds** and **Top-10 most recent operations** for observability.
+
+1. The script queries the **Power BI ExecuteQueries REST API** against the *Capacity Metrics* dataset.
+2. A DAX query calculates the **Sum of Compute Units (CU)** consumed by the target capacity during a recent time window (e.g. last 5 minutes).
+3. If any CU usage is detected (`SumCUs > 0`), the script logs that the capacity is still active and exits.
+4. If no usage is detected, it calls the **Azure Resource Manager (ARM)** API to suspend the capacity.
+5. All actions and results are logged for observability.
 
 ---
 
 ## ✅ Prerequisites
-- **Microsoft Fabric capacity** (F-SKU) deployed in your subscription.
-- **Azure Automation Account** with:
+
+Before using this runbook, make sure you have:
+
+- A **Microsoft Fabric Capacity (F-SKU)** deployed in Azure.  
+- An **Azure Automation Account** with:
   - PowerShell 7 runtime
-  - System-Assigned or User-Assigned Managed Identity
-- Managed Identity must have:
-  - `Contributor` role on the Fabric capacity resource
-  - `Viewer` (and `Build`) permissions in the *Microsoft Fabric Capacity Metrics* workspace + dataset
-- **Tenant settings** enabled in Power BI Admin Portal:
-  - ✅ *Service principals can use Power BI APIs*
-  - ✅ *Allow service principals to use ExecuteQueries API*
+  - System-Assigned or User-Assigned Managed Identity  
+- Managed Identity permissions:
+  - `Contributor` role on the Fabric capacity
+  - `Viewer` (and optionally `Build`) permission on the *Fabric Capacity Metrics* workspace and dataset  
+- Power BI tenant settings:
+  - ✅ *Service principals can call Fabric public APIs *  
+  - ✅ *Allow service principals to use ExecuteQueries API*  
 
 ---
 
 ## 🚀 Setup and Usage
-1. **Deploy script** as a runbook (`Check-And-Pause-Fabric.ps1`) in your Automation Account.
-2. **Import parameters** (SubscriptionId, ResourceGroup, CapacityName, MetricsGroupId, MetricsDatasetId).
-3. **Schedule** the runbook every 15 minutes.
-4. (Optional) Create a companion `Resume-Fabric.ps1` runbook + webhook for on-demand wake-up.
-5. Monitor runbook logs for activity summaries and pause events.
+
+1. **Deploy as a Runbook**
+   - In your Azure Automation Account, go to **Runbooks → Create a Runbook**.
+   - Name it e.g. `Auto-Suspend-Fabric-By-Activity`.
+   - Select **PowerShell** and runtime **7.2**.
+   - Paste the script code, then **Save** and **Publish** it.
+
+2. **Schedule the Runbook**
+   - Run the job periodically (e.g. every 5–15 minutes).
+   - It will automatically detect activity and suspend capacity if idle.
+
+3. **Monitor Logs**
+   - Each run logs:
+     - ✅ `[ACTIVE]` when capacity still has compute activity.  
+     - 💤 `[IDLE]` when no compute activity and suspension triggered.  
+     - 🛑 `[ERROR]` when suspension fails.
 
 ---
 
 ## 🎛️ Parameters
-| Name              | Type   | Required | Default | Description |
-|-------------------|--------|----------|---------|-------------|
-| `SubscriptionId`  | string | ✅       | –       | Azure subscription hosting the capacity |
-| `ResourceGroup`   | string | ✅       | –       | Resource Group of the capacity |
-| `CapacityName`    | string | ✅       | –       | Azure Resource Name of the Fabric capacity (e.g. `fabricdev01`) |
-| `MetricsGroupId`  | string | ✅       | –       | Workspace ID of the *Capacity Metrics* app |
-| `MetricsDatasetId`| string | ✅       | –       | Dataset ID of the *Capacity Metrics* semantic model |
-| `QuietMinutes`    | int    | ❌       | `90`    | Window of inactivity before suspension |
+
+| Name | Type | Required | Default | Description |
+|------|------|-----------|----------|-------------|
+| `SubscriptionId` | string | ✅ | – | Azure subscription hosting the capacity |
+| `ResourceGroupName` | string | ✅ | – | Resource group containing the capacity |
+| `CapacityName` | string | ✅ | – | Fabric capacity resource name |
+| `CapacityId` | string | ✅ | – | Fabric capacity ID used in the DAX filter |
+| `WorkspaceId` | string | ✅ | – | Workspace ID of the *Capacity Metrics* semantic model |
+| `DatasetId` | string | ✅ | – | Dataset ID of the *Capacity Metrics* semantic model |
+| `UTCshiftMinutes` | int | ❌ | `120` | Timezone offset from UTC (e.g. `120` for UTC+2) |
+| `WindowMinutes` | int | ❌ | `5` | Time window (in minutes) used to check for recent activity |
 
 ---
 
-## ✔️ Valid Operations
-Activity is counted if any of the following occur within the window:
-- **Interactive operations** (from `TimePointInteractiveDetail`):
-  - DAX/SQL queries
-  - Live report interactions
-  - Ad-hoc analysis
-- **Background operations** (from `TimePointBackgroundDetail`):
-  - Dataset refresh
-  - Dataflow Gen2 refresh
-  - Pipelines execution
-  - Notebook / Spark job
-  - Warehouse / Lakehouse loads
+## 🧮 Logic Summary
 
-Runbook logs show:
-- 📊 **Summary**: `Type | Operation → Count`
-- 📄 **Top 10 details**: `Type | Operation | Status | User | Timestamp`
+The script runs a DAX query similar to:
+
+```DAX
+EVALUATE
+ROW(
+  "SumCUs", SUM('CU Detail'[CU (s)]),
+  "HasActivity", IF(SUM('CU Detail'[CU (s)]) > 0, 1, 0),
+  "CurrentTime", UTCNOW()
+)
+```
+
+If `SumCUs > 0` → capacity remains **active**.  
+If `SumCUs = 0` → capacity is **suspended** via ARM API.
 
 ---
 
-## ⚠️ Error Handling
-- If the ARM call fails → runbook throws with full diagnostic output.
-- If ExecuteQueries returns **400 (Bad Request)** → error body is logged, runbook assumes **no activity** (so capacity may suspend).
-- If ExecuteQueries fails for other reasons → warning logged, runbook assumes **no activity**.
-- Conservative defaults:
-  - Use **QuietMinutes ≥ 90** and **schedule every 15 min** to avoid false pauses.
-  - Logs clearly indicate *why* suspension was skipped or executed.
+## ⚠️ Error Handling and Logging
+
+- Logs clearly indicate activity status: `[ACTIVE]`, `[IDLE]`, or `[ERROR]`.
+- If the ARM suspend call fails, the full error message is printed.
+- The job throws on failure, marking the Automation Runbook as **Failed** for visibility.
+- Safe defaults:
+  - A small time window (default `5 min`) ensures quick detection of inactivity.
+  - No operation is performed if the Metrics query fails (no blind suspension).
 
 ---
 
 ## 📌 Example Log Output
-Capacity: fabricdev01 | State=Active | SKU=F2 | Loc=Poland Central
-Metrics: Interactive=0, Background=2, Any=2
-=== Activity kinds in window (Type × Operation → Count) ===
-Background | Refresh → 2
-=== Recent activity details (top 10) ===
-Background | Refresh | Completed | svc-refresh@appid | 2025-09-07T18:00:00Z
-Recent activity (<= 90 min): True
-Activity detected -> skip suspend.
+
+```
+✅ [ACTIVE]  SumCUs: 320 | Window: 5 min | Capacity: fabric-dev → STILL RUNNING
+💤 [IDLE]    SumCUs: 0   | Window: 5 min | Capacity: fabric-dev → SUSPENDING...
+🛑 [ERROR]   SumCUs: 0   | Window: 5 min | Capacity: fabric-dev → SUSPEND FAILED: <error>
+```
 
 ---
 
 ## 📝 License
-MIT – feel free to adapt and extend.
+
+MIT — feel free to use and modify.
