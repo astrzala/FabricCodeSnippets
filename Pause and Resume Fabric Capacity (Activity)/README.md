@@ -29,7 +29,6 @@ It uses **Azure Automation (PowerShell 7)**, **Managed Identity**, and the **Fab
 
 Before using this runbook, make sure you have:
 
-- A **Microsoft Fabric Capacity (F-SKU)** deployed in Azure.
 - **Microosft Fabric Capacity Metrics App** installed  
 - An **Azure Automation Account** with:
   - PowerShell 7 runtime
