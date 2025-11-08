@@ -1,4 +1,8 @@
 <h1>
+  <img src="~/Data_Guideline.png" alt="Data Guideline Logo" width="150" style="vertical-align: center;"/>
+</h1>
+
+<h1>
   <img src="~/Fabric_256.svg" alt="Microsoft Fabric Logo" width="30" style="vertical-align: middle;"/>
   Microsoft Fabric – Code Snippets
 </h1>
