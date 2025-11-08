@@ -1,6 +1,8 @@
-<h1>
-  <img src="~/Data_Guideline.png" alt="Data Guideline Logo" width="250" style="vertical-align: center;"/>
-</h1>
+<div align="center" style="background-color:white; padding: 20px;">
+  <h1>
+    <img src="Data_Guideline.png" alt="Data Guideline Logo" width="250">
+  </h1>
+</div>
 
 <h1>
   <img src="~/Fabric_256.svg" alt="Microsoft Fabric Logo" width="30" style="vertical-align: middle;"/>
