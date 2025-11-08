@@ -1,5 +1,5 @@
 <img src="~/Data_Guideline_Logo_GitHub.png" alt="Data Guideline Banner" width="100%">
-
+<hr>
 <h1>
   <img src="~/Fabric_256.svg" alt="Microsoft Fabric Logo" width="30" style="vertical-align: middle;"/>
   Microsoft Fabric – Code Snippets
