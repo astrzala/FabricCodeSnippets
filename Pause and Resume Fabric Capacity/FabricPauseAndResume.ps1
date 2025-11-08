@@ -34,7 +34,7 @@ $svcBase = "https://management.azure.com/subscriptions/$SubscriptionId/resourceG
 $svcUri  = "$svcBase/${op}?api-version=$apiVersion"
 $headers = @{ Authorization = "Bearer $tokenArm" }
 
-# ---- Minimalny check: jeśli już zatrzymane, nie wołaj 'suspend' ----
+# ---- Check if already suspended ----
 if ($op -eq "suspend") {
   $cap = Invoke-RestMethod -Method GET -Uri "${svcBase}?api-version=$apiVersion" -Headers $headers
   $state = $cap.properties.state
