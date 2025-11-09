@@ -16,9 +16,26 @@ $ErrorActionPreference = 'Stop'
 Import-Module Az.Accounts -ErrorAction SilentlyContinue
 Connect-AzAccount -Identity | Out-Null
 
-# ---- Tokens for APIs ----
-$tokenPbi = (Get-AzAccessToken -ResourceUrl "https://analysis.windows.net/powerbi/api").Token
+# ---- ARM token (only) for the early state check ----
 $tokenArm = (Get-AzAccessToken -ResourceUrl "https://management.azure.com/").Token
+$apiVersionArm = "2023-11-01"
+$headersArm = @{ Authorization = "Bearer $tokenArm" }
+
+# ---- Skip everything if already stopped/paused ----
+$capGetUri = "https://management.azure.com/subscriptions/$SubscriptionId/resourceGroups/$ResourceGroupName/providers/Microsoft.Fabric/capacities/${CapacityName}?api-version=$apiVersionArm"
+$cap = Invoke-RestMethod -Method GET -Uri $capGetUri -Headers $headersArm
+
+$state = $cap.properties.state
+if (-not $state) { $state = $cap.properties.status }
+if (-not $state) { $state = $cap.properties.provisioningState }
+
+if ($state -match 'Suspended|Stopped|Paused|Deallocated') {
+  Write-Output "🛌 [IDLE]   Capacity: $CapacityName → already SUSPENDED (state: $state)."
+  return
+}
+
+# ---- Only now get PBI token and run DAX, since capacity is running ----
+$tokenPbi = (Get-AzAccessToken -ResourceUrl "https://analysis.windows.net/powerbi/api").Token
 
 # ---- DAX query ----
 $dax = @"
@@ -66,25 +83,24 @@ $table = $response.results[0].tables[0]
 if ($table -and $table.rows -and $table.rows.Count -gt 0) {
   $row0 = $table.rows[0]
   if ($row0 -is [pscustomobject] -or $row0 -is [hashtable]) {
-    $sumCUs = [double]($row0.'[SumCUs]') 
+    $sumCUs = [double]($row0.'[SumCUs]')
   }
 }
 
-# ---- Decide on suspend  ----
+# ---- Decide on suspend ----
 if ($sumCUs -gt 0) {
   Write-Output "[ACTIVE]  SumCUs: $sumCUs | Window: $WindowMinutes min | Capacity: $CapacityName → STILL RUNNING"
   return
 }
 
-# ---- ARM call ----
-$apiVersionArm = "2023-11-01"
-$svcUri = "https://management.azure.com/subscriptions/$SubscriptionId/resourceGroups/$ResourceGroupName/providers/Microsoft.Fabric/capacities/$CapacityName/suspend?api-version=$apiVersionArm"
-$headersArm = @{ Authorization = "Bearer $tokenArm" }
+# ---- Suspend (with safe interpolation) ----
+$svcUri = "https://management.azure.com/subscriptions/$SubscriptionId/resourceGroups/$ResourceGroupName/providers/Microsoft.Fabric/capacities/${CapacityName}/suspend?api-version=$apiVersionArm"
 
 try {
-  $null = Invoke-RestMethod -Method POST -Uri $svcUri -Headers $headersArm
+  Invoke-RestMethod -Method POST -Uri $svcUri -Headers $headersArm | Out-Null
   Write-Output "[IDLE]   SumCUs: $sumCUs | Window: $WindowMinutes min | Capacity: $CapacityName → SUSPENDING..."
-} catch {
+}
+catch {
   $msg = $_.Exception.Message
   Write-Output "[ERROR]  SumCUs: $sumCUs | Window: $WindowMinutes min | Capacity: $CapacityName → SUSPEND FAILED: $msg"
   throw
