@@ -1,14 +1,14 @@
 # 🔄 Microsoft Fabric Capacity Auto-Suspend Based on Activity ⚡️
 
 This PowerShell runbook automatically **suspends your Microsoft Fabric capacity** when no activity is detected within a configurable time window.  
-It uses **Azure Automation (PowerShell 7)**, **Managed Identity**, and the **Fabric Capacity Metrics** semantic model to decide whether the capacity should remain active or be paused.
+It uses **Azure Automation Runbook**, **Managed Identity**, and the **Fabric Capacity Metrics App** semantic model to decide whether the capacity should remain active or be paused.
 
 ---
 
 ## 🔑 Key Features
 
 - 💤 **Auto-suspend:** Automatically pauses the capacity when no compute activity (`SumCUs`) is detected.
-- 📈 **Metrics-driven:** Uses the official *Fabric Capacity Metrics* semantic model for real-time usage checks.
+- 📈 **Metrics-driven:** Uses the official *Fabric Capacity Metrics App* semantic model for real-time usage checks.
 - 🧠 **Smart decision logic:** Keeps capacity running when recent activity is detected; suspends otherwise.
 - 🔐 **Credential-free:** Uses Managed Identity for authentication — no secrets required.
 - ☁️ **Serverless automation:** Designed for Azure Automation Runbooks, with minimal maintenance.
@@ -31,7 +31,7 @@ Before using this runbook, make sure you have:
 
 - **Microosft Fabric Capacity Metrics App** installed  
 - An **Azure Automation Account** with:
-  - PowerShell 7 runtime
+  - PowerShell 7.2 runtime
   - System-Assigned or User-Assigned Managed Identity  
 - Managed Identity permissions:
   - `Contributor` role on the Fabric capacity
@@ -55,6 +55,7 @@ Before using this runbook, make sure you have:
 
 3. **Monitor Logs**
    - Each run logs:
+     - `[STOPPED]` when capacity is already suspended.
      - `[ACTIVE]` when capacity still has compute activity.  
      - `[IDLE]` when no compute activity and suspension triggered.  
      - `[ERROR]` when suspension fails.
@@ -96,7 +97,7 @@ If `SumCUs = 0` → capacity is **suspended** via ARM API.
 
 ## ⚠️ Error Handling and Logging
 
-- Logs clearly indicate activity status: `[ACTIVE]`, `[IDLE]`, or `[ERROR]`.
+- Logs clearly indicate activity status: `[STOPPED]`,`[ACTIVE]`, `[IDLE]`, or `[ERROR]`.
 - If the ARM suspend call fails, the full error message is printed.
 - The job throws on failure, marking the Automation Runbook as **Failed** for visibility.
 - Safe defaults:
