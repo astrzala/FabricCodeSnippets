@@ -6,7 +6,7 @@ param(
   [Parameter(Mandatory = $true)] [string] $WorkspaceId,         # 5) Workspace ID (where the Fabric Capacity Metrics semantic model lives)
   [Parameter(Mandatory = $true)] [string] $DatasetId,           # 6) Semantic model ID (dataset)
   [int] $UTCshiftMinutes = 120,                                 # 7) UTC shift in minutes (e.g., 120 for UTC+2)
-  [int] $WindowMinutes = 5                                      # 8) Timeframe/window (minutes) to check for activity
+  [int] $WindowMinutes = 15                                     # 8) Timeframe/window (minutes) to check for activity
 )
 
 Set-StrictMode -Version Latest
