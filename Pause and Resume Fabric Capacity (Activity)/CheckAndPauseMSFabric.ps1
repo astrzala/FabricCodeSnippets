@@ -30,7 +30,7 @@ if (-not $state) { $state = $cap.properties.status }
 if (-not $state) { $state = $cap.properties.provisioningState }
 
 if ($state -match 'Suspended|Stopped|Paused|Deallocated') {
-  Write-Output "🛌 [IDLE]   Capacity: $CapacityName → already SUSPENDED (state: $state)."
+  Write-Output "[IDLE]   Capacity: $CapacityName → already SUSPENDED (state: $state)."
   return
 }
 
