@@ -5,14 +5,14 @@
   Microsoft Fabric – Code Snippets
 </h1>
 
-Welcome to **CodeSnippets** – a collection of reusable scripts that can simplify and accelerate work with **Microsoft Fabric**.  
+Welcome to **Fabric Code Snippets** – a collection of reusable scripts that can simplify and accelerate work with **Microsoft Fabric**.  
 This repository is designed as a toolbox: each folder contains one or more scripts focused on specific tasks (automation, administration, troubleshooting, deployment).
 
 ---
 
 ## 🔑 Key Features
 - Ready-to-use **PowerShell**, **Bash**, and **Python** snippets.
-- Scripts tailored for **Microsoft Fabric** scenarios.
+- Scripts tailored for **Microsoft Fabric** and **Power BI** scenarios.
 - Clear folder structure for easy navigation.
 - Continuously growing set of utilities as new needs arise.
 
