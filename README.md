@@ -2,7 +2,7 @@
 <hr>
 <h1>
   <img src="~/Fabric_256.svg" alt="Microsoft Fabric Logo" width="30" style="vertical-align: middle;"/>
-  Microsoft Fabric – Code Snippets
+  Microsoft Fabric Code Snippets
 </h1>
 
 Welcome to **Fabric Code Snippets** – a collection of reusable scripts that can simplify and accelerate work with **Microsoft Fabric**.  
