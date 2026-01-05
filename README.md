@@ -25,7 +25,7 @@ Current folders:
 - [**Pause and Resume Fabric Capacity**](https://github.com/astrzala/CodeSnippets/tree/main/Pause%20and%20Resume%20Fabric%20Capacity)  
   Scripts for pausing and resuming Microsoft Fabric capacities on demand or schedule.
 
-- [**Pause and Resume Fabric Capacity (Activity)**](https://github.com/astrzala/CodeSnippets/tree/main/Pause%20Fabric%20Capacity%20(Activity))  
+- [**Pause Fabric Capacity (Activity)**](https://github.com/astrzala/CodeSnippets/tree/main/Pause%20Fabric%20Capacity%20(Activity))  
   Enhanced scripts that detect Fabric capacity activity and automatically pause when idle.
 
 > More folders and scripts will be added over time as the collection grows.
