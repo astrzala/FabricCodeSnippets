@@ -85,7 +85,7 @@ Before using this runbook, make sure you have:
 | `CapacityId` | string | ✅ | – | Fabric capacity ID (GUID format, used in DAX filter) |
 | `WorkspaceId` | string | ✅ | – | Workspace ID containing the *Capacity Metrics* semantic model |
 | `DatasetId` | string | ✅ | – | Dataset/Semantic model ID of the *Capacity Metrics* app |
-| `UserTimezoneShiftHours` | int | ❌ | `0` | User display timezone offset from UTC in hours (e.g. `2` for UTC+2, `-5` for UTC-5) |
+| `UserTimezoneShiftHours` | int | ❌ | `0` | User display timezone offset from UTC in hours (e.g. `2` for UTC+2) |
 | `DataTimestampShiftHours` | int | ❌ | `-5` | Data timestamp correction offset in hours (aligns data timestamps with your timezone) |
 | `IdleThresholdHours` | int | ❌ | `1` | Lookback window in hours to check for activity |
 | `MinimumCUThresholdSeconds` | int | ❌ | `100` | Noise threshold: minimum sum of CU seconds to consider capacity "active" |
