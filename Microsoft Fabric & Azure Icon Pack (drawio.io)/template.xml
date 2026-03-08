@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<templates>
+<clibs name="Fabric">
+  <add>Uhttps://raw.githubusercontent.com/astrzala/FabricToolset/main/Microsoft%20Fabric%20%26%20Azure%20Icon%20Pack%20(drawio.io)/xml/Fabric_Core.xml</add>
+  <add>Uhttps://raw.githubusercontent.com/astrzala/FabricToolset/main/Microsoft%20Fabric%20%26%20Azure%20Icon%20Pack%20(drawio.io)/xml/Microsoft_Tool_and_Platforms.xml</add>
+  <add>Uhttps://raw.githubusercontent.com/astrzala/FabricToolset/main/Microsoft%20Fabric%20%26%20Azure%20Icon%20Pack%20(drawio.io)/xml/Fabric_Artifacts.xml</add>
+  <add>Uhttps://raw.githubusercontent.com/astrzala/FabricToolset/main/Microsoft%20Fabric%20%26%20Azure%20Icon%20Pack%20(drawio.io)/xml/Fabric_Black.xml</add>
+  <add>Uhttps://raw.githubusercontent.com/astrzala/FabricToolset/main/Microsoft%20Fabric%20%26%20Azure%20Icon%20Pack%20(drawio.io)/xml/Fabric_Datasources.xml</add>
+  <add>Uhttps://raw.githubusercontent.com/astrzala/FabricToolset/main/Microsoft%20Fabric%20%26%20Azure%20Icon%20Pack%20(drawio.io)/xml/Azure_Core.xml</add>
+  <add>Uhttps://raw.githubusercontent.com/astrzala/FabricToolset/main/Microsoft%20Fabric%20%26%20Azure%20Icon%20Pack%20(drawio.io)/xml/Azure_DevOps.xml</add>
+</clibs>
+<template section="Microsoft" url=""
+  preview="" 
+  title="Microsoft Fabric &amp; Azure Icon Pack"
+  libs=""
+  clibs="Fabric"
+  tags="fabric;microsoft;azure"/>
+</templates>
