@@ -12,9 +12,9 @@ The icons were extracted from the Microsoft Fabric UI and organized into **clean
 - **Internal padding removed** for better alignment
 - **Ready-to-use Draw.io libraries**
 
-## Using the Icons
+## 🛠️ Using the Icons
 
-### 🌐 Draw.io Online
+### Draw.io Online
 
 Open the library link and it should load automatically:
 
@@ -37,7 +37,7 @@ If the libraries do not load automatically
 
 </br>
 
-### 💻 Draw.io Desktop
+### Draw.io Desktop
 
 1. Download the `.drawio` library files from this repository  
 2. Open **draw.io**  
