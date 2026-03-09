@@ -1,4 +1,4 @@
-# Microsoft Fabric Architecture Icons 🧩
+# Microsoft Fabric Architecture Icons
 
 A curated set of **Microsoft Fabric and Azure icons optimized for architecture diagrams**.
 
@@ -12,13 +12,13 @@ The icons were extracted from the Microsoft Fabric UI and organized into **clean
 - **Internal padding removed** for better alignment
 - **Ready-to-use Draw.io libraries**
 
-## 🚀 Using the Icons
+## Using the Icons
 
 ### 🌐 Draw.io Online
 
 Open the library link and it should load automatically:
 
-**Microsoft Fabric Draw.io Icon Pack**
+🔗 **[Microsoft Fabric Draw.io Icon Pack](https://app.diagrams.net/?splash=0&clibs=Uhttps%3A%2F%2Fraw.githubusercontent.com%2Fastrzala%2FFabricToolset%2Fmain%2FMicrosoft%2520Fabric%2520%2526%2520Azure%2520Icon%2520Pack%2Fxml%2FMicrosoft_Tool_and_Platforms.xml;Uhttps%3A%2F%2Fraw.githubusercontent.com%2Fastrzala%2FFabricToolset%2Fmain%2FMicrosoft%2520Fabric%2520%2526%2520Azure%2520Icon%2520Pack%2Fxml%2FFabric_Core.xml;Uhttps%3A%2F%2Fraw.githubusercontent.com%2Fastrzala%2FFabricToolset%2Fmain%2FMicrosoft%2520Fabric%2520%2526%2520Azure%2520Icon%2520Pack%2Fxml%2FFabric_Artifacts.xml;Uhttps%3A%2F%2Fraw.githubusercontent.com%2Fastrzala%2FFabricToolset%2Fmain%2FMicrosoft%2520Fabric%2520%2526%2520Azure%2520Icon%2520Pack%2Fxml%2FFabric_Black.xml;Uhttps%3A%2F%2Fraw.githubusercontent.com%2Fastrzala%2FFabricToolset%2Fmain%2FMicrosoft%2520Fabric%2520%2526%2520Azure%2520Icon%2520Pack%2Fxml%2FFabric_Datasources.xml;Uhttps%3A%2F%2Fraw.githubusercontent.com%2Fastrzala%2FFabricToolset%2Fmain%2FMicrosoft%2520Fabric%2520%2526%2520Azure%2520Icon%2520Pack%2Fxml%2FAzure_Core.xml;Uhttps%3A%2F%2Fraw.githubusercontent.com%2Fastrzala%2FFabricToolset%2Fmain%2FMicrosoft%2520Fabric%2520%2526%2520Azure%2520Icon%2520Pack%2Fxml%2FAzure_DevOps.xml)**
 
 If the libraries do not load automatically:
 
