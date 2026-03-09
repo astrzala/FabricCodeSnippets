@@ -28,6 +28,8 @@ If the libraries do not load automatically:
 2. Go to **Configuration**
 3. Import the library file
 
+</br></br>
+
 ### 💻 Draw.io Desktop
 
 1. Download the `.drawio` library files from this repository  
@@ -35,6 +37,7 @@ If the libraries do not load automatically:
 3. Go to **File → Open Library**  
 4. Select the downloaded library  
 
+</br>
 ## 📦 What's Included
 
 | Library | Icons |
