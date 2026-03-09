@@ -4,7 +4,7 @@ A curated set of **Microsoft Fabric and Azure icons optimized for architecture d
 
 The icons were extracted from the Microsoft Fabric UI and organized into **clean, ready-to-use SVG files and Draw.io libraries**.
 
-## Features
+## ✨ Features
 
 - Lossless **SVG format**
 - **Uniform 60px height** for consistent diagrams
