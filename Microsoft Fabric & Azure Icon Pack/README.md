@@ -57,3 +57,6 @@ If the libraries do not load automatically
 | Azure DevOps | 7 |
 | Azure Core | 55 |
 
+## 🧩 Loaded Template
+
+![Fabric Draw.io Template](https://raw.githubusercontent.com/astrzala/FabricToolset/main/Microsoft%20Fabric%20%26%20Azure%20Icon%20Pack/template/img/DrawIO_Fabric_Icon_Pack.png)
