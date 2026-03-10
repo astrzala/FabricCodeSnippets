@@ -24,7 +24,7 @@ Open the library link and it should load automatically:
 
 If the libraries do not load automatically
 1. Open **[draw.io](https://app.diagrams.net)**
-2. Go to **Configuration**
+2. Go to **Extras → Configuration**
 3. Paste the following configuration:
 
 ```json
@@ -33,7 +33,8 @@ If the libraries do not load automatically
 }
 ```
 4. Click **Apply**
-5. Then create a new diagram using the template **File → Microsoft → Select the template → Create**
+5. Refresh the page if needed
+6. Then create a new diagram using the template **File → Microsoft → Select the template → Create**
 
 </br>
 
