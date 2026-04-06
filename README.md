@@ -7,7 +7,7 @@
 
 Welcome to **Fabric Toolset** – a collection of reusable scripts and resources that simplify and accelerate work with **Microsoft Fabric**.  
 This repository is designed as a toolbox: each folder contains utilities focused on specific tasks, including automation, administration, troubleshooting, deployment, and architecture design.
-
+<img src="https://hitscounter.dev/api/hit?url=https%3A%2F%2Fgithub.com%2Fastrzala%2FFabricToolset%2Ftree%2Fmain&label=Fabric+Toolset&icon=github&color=%230d6efd&message=&style=flat&tz=UTC">
 ---
 
 ## 🔑 Key Features
